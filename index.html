@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selamat Hari Raya Idul Adha</title>
-    <!-- Google Fonts & Font Awesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@1&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -57,26 +56,25 @@
         }
 
         .card-container:active {
-            transform: scale(0.98) rotateX(5deg) rotateY(5deg);
+            transform: scale(0.98);
         }
 
-        /* Audio Control Button (Floating & Glow) */
+        /* Audio Control Button */
         .audio-control {
             background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
             border: none;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             color: #0f172a;
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 10px auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 20px rgba(234, 179, 8, 0.6);
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .audio-control.playing {
@@ -84,6 +82,14 @@
             background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
             color: white;
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+        }
+
+        .audio-status {
+            display: block; 
+            font-size: 0.75rem; 
+            color: #eab308; 
+            margin-bottom: 25px;
+            font-weight: 500;
         }
 
         /* Arabic Typography */
@@ -211,17 +217,14 @@
 </head>
 <body>
 
-    <!-- Background Canvas for Stars -->
     <canvas id="particles"></canvas>
 
-    <!-- Main Card -->
     <div class="card-container">
         
-        <!-- Audio Player Button -->
-        <button class="audio-control" id="audioBtn" onclick="toggleAudio()" title="Putar Takbiran">
+        <button class="audio-control" id="audioBtn" onclick="toggleAudio()">
             <i class="fas fa-play" id="audioIcon"></i>
         </button>
-        <span style="display:block; font-size: 0.75rem; color:#94a3b8; margin-top:-15px; margin-bottom:20px;">Ketuk untuk Takbiran</span>
+        <span class="audio-status" id="audioStatus">Ketuk untuk Putar Takbiran</span>
 
         <div class="illustration">
             <i class="fa-solid fa-kaaba"></i>
@@ -236,44 +239,59 @@
             <p>- Selamat Hari Raya -</p>
         </div>
 
-        <!-- Interactive Button to Copy Text -->
         <button class="btn-action" onclick="copyText()">
-            <i class="font-awesome fa-regular fa-copy"></i> Salin Ucapan & Bagikan
+            <i class="fa-regular fa-copy"></i> Salin Ucapan & Bagikan
         </button>
 
     </div>
 
-    <!-- Hidden Audio Element (Menggunakan CDN publik suara takbiran gratis) -->
-    <audio id="takbiranAudio" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        <!-- Catatan: Anda bisa mengganti URL src di atas dengan file audio .mp3 takbiran milik Anda sendiri yang ditaruh di hosting atau link archive.org -->
+    <audio id="takbiranAudio" loop preload="auto">
+        <source src="https://archive.org/download/takbiran_202107/takbiran.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Notification -->
     <div class="toast" id="toast">Ucapan berhasil disalin!</div>
 
     <script>
-        // Audio Control Logic
         const audio = document.getElementById('takbiranAudio');
         const audioBtn = document.getElementById('audioBtn');
         const audioIcon = document.getElementById('audioIcon');
+        const audioStatus = document.getElementById('audioStatus');
 
-        // Menggunakan sampel audio takbiran publik alternatif demi fungsionalitas
-        // Anda bebas mengganti link ini dengan audio takbiran yang lebih pas
-        audio.src = "https://archive.org/download/takbiran_202107/takbiran.mp3"; 
+        // Link audio cadangan yang super ringan dan cepat jika link utama bermasalah
+        const backupAudioUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+        let masterTryCount = 0;
 
         function toggleAudio() {
             if (audio.paused) {
-                audio.play().then(() => {
-                    audioBtn.classList.add('playing');
-                    audioIcon.className = 'fas fa-pause';
-                }).catch(err => {
-                    alert("Izinkan browser memutar audio terlebih dahulu dengan mengetuk layar.");
-                });
+                audioStatus.innerText = "Memuat audio...";
+                
+                let playPromise = audio.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        audioBtn.classList.add('playing');
+                        audioIcon.className = 'fas fa-pause';
+                        audioStatus.innerText = "Takbiran Berputar ♪";
+                    }).catch(error => {
+                        console.log("Autoplay dicegah atau file lambat. Mencoba cadangan...");
+                        masterTryCount++;
+                        
+                        // Jika gagal, ganti ke link cadangan yang dijamin anti-blokir jaringan
+                        if(masterTryCount === 1) {
+                            audio.src = backupAudioUrl;
+                            audio.play().then(() => {
+                                audioBtn.classList.add('playing');
+                                audioIcon.className = 'fas fa-pause';
+                                audioStatus.innerText = "Takbiran Berputar (Backup) ♪";
+                            });
+                        }
+                    });
+                }
             } else {
                 audio.pause();
                 audioBtn.classList.remove('playing');
                 audioIcon.className = 'fas fa-play';
+                audioStatus.innerText = "Ketuk untuk Putar Takbiran";
             }
         }
 
@@ -289,7 +307,7 @@
             }, 2500);
         }
 
-        // Particle Background Effect (Malam Takbiran Bertabur Bintang)
+        // Particle Background Effect
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         
@@ -308,14 +326,12 @@
                 y: Math.random() * height,
                 radius: Math.random() * 2,
                 alpha: Math.random(),
-                speed: Math.random() * 0.03
+                speed: Math.random() * 0.02 + 0.01
             });
         }
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = 'rgba(255, 255, 255, ';
-            
             particles.forEach(p => {
                 p.alpha += p.speed;
                 if (p.alpha > 1 || p.alpha < 0) p.speed = -p.speed;
@@ -324,7 +340,6 @@
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fill();
             });
-            
             requestAnimationFrame(animate);
         }
         animate();
