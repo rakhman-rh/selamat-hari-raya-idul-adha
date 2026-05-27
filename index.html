@@ -3,165 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Hari Raya Idul Adha & Ibadah Kurban</title>
-    <!-- Tailwind CSS Modern -->
-    <script src="https://tailwindcss.com"></script>
-    <!-- Google Fonts: Arab & Modern Sans -->
-    <link href="https://googleapis.com" rel="stylesheet">
-    <!-- Canvas Confetti & AnimeJS untuk Animasi Kompleks -->
-    <script src="https://jsdelivr.net"></script>
-    <script src="https://cloudflare.com"></script>
+    <title>Selamat Hari Raya Idul Adha</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@1&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #111827 100%);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .arabic { font-family: 'Amiri', serif; }
-        .glow-effect { box-shadow: 0 0 30px rgba(234, 179, 8, 0.3); }
-        .animal-card:hover { transform: translateY(-8px) scale(1.05); }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        /* Background Particle Effect */
+        #particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Main Container Card */
+        .card-container {
+            width: 90%;
+            max-width: 400px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            border-radius: 24px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1);
+            z-index: 10;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .card-container:active {
+            transform: scale(0.98) rotateX(5deg) rotateY(5deg);
+        }
+
+        /* Audio Control Button (Floating & Glow) */
+        .audio-control {
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: #0f172a;
+            font-size: 20px;
+            cursor: pointer;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.6);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .audio-control.playing {
+            animation: pulse 1.5s infinite;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+        }
+
+        /* Arabic Typography */
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            color: #fef08a;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(234, 179, 8, 0.3);
+        }
+
+        /* Text Styling */
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fef08a, #eab308);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        /* Illustration Wrapper */
+        .illustration {
+            font-size: 4rem;
+            color: #eab308;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 5px 15px rgba(234, 179, 8, 0.4));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Message Box */
+        .message-box {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #eab308;
+            text-align: left;
+        }
+
+        .message-box p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            margin-bottom: 10px;
+        }
+
+        .message-box p:last-child {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #fef08a;
+            text-align: right;
+        }
+
+        /* Interactive Copy Button */
+        .btn-action {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #f8fafc;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-action:hover {
+            background: rgba(234, 179, 8, 0.2);
+            border-color: #eab308;
+            color: #fef08a;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            background: #22c55e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 overflow-x-hidden text-white relative">
+<body>
 
-    <!-- Ornamen Latar Belakang: Siluet Bulan & Bintang Berkedip -->
-    <div class="absolute top-10 left-10 text-6xl opacity-20 animate-pulse">🌙</div>
-    <div class="absolute top-32 right-16 text-xl opacity-40 animate-ping">⭐</div>
-    <div class="absolute bottom-20 left-20 text-xl opacity-30 animate-ping [animation-delay:1s]">⭐</div>
+    <!-- Background Canvas for Stars -->
+    <canvas id="particles"></canvas>
 
-    <!-- KARTU UTAMA -->
-    <div id="main-card" class="relative w-full max-w-2xl bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl text-center opacity-0 translate-y-10 transition-all duration-1000">
+    <!-- Main Card -->
+    <div class="card-container">
         
-        <!-- Badge Atas -->
-        <span class="inline-block bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs px-4 py-1.5 rounded-full uppercase tracking-widest font-bold mb-6">
-            Dzulhijjah Perayaan & Keikhlasan
-        </span>
+        <!-- Audio Player Button -->
+        <button class="audio-control" id="audioBtn" onclick="toggleAudio()" title="Putar Takbiran">
+            <i class="fas fa-play" id="audioIcon"></i>
+        </button>
+        <span style="display:block; font-size: 0.75rem; color:#94a3b8; margin-top:-15px; margin-bottom:20px;">Ketuk untuk Takbiran</span>
 
-        <!-- Teks Kaligrafi Arab -->
-        <h2 class="arabic text-5xl text-amber-400 mb-2 tracking-wide drop-shadow-md">عيد الأضحى المبارك</h2>
-        <p class="text-xs text-emerald-300 uppercase tracking-widest font-semibold mb-6">"Eid Al-Adha Al-Mubarak"</p>
-
-        <!-- Judul Utama -->
-        <h1 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
-            Selamat Hari Raya <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-emerald-400">
-                Idul Adha & Selamat Berkurban
-            </span>
-        </h1>
-        
-        <!-- Ucapan Khidmat -->
-        <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto">
-            Selamat menunaikan <span class="text-amber-300 font-semibold">Ibadah Kurban</span> bagi yang melaksanakan, serta selamat bagi saudara kita yang sedang merayakan puncak <span class="text-emerald-300 font-semibold">Ibadah Haji</span> di tanah suci. Semoga esensi keikhlasan Nabi Ibrahim AS dan keteguhan Nabi Ismail AS meresap ke dalam sanubari kita.
-        </p>
-
-        <!-- FITUR INTERAKTIF: PILIH HEWAN KURBAN DIGITAL -->
-        <div class="bg-black/30 border border-white/5 rounded-2xl p-5 mb-8">
-            <h3 class="text-xs uppercase tracking-wider text-gray-400 font-bold mb-4">
-                👇 Ketuk Hewan Pilihanmu untuk Menyalakan Tabuh Bedug & Kembang Api
-            </h3>
-            
-            <div class="grid grid-cols-3 gap-3">
-                <!-- Pilihan Domba -->
-                <button onclick="triggerSacrifice('domba', '🐑')" class="animal-card bg-emerald-950/40 border border-emerald-500/20 rounded-xl p-4 transition-all duration-300 cursor-pointer text-center group">
-                    <div class="text-4xl mb-2 group-hover:scale-125 transition-transform">🐑</div>
-                    <div class="text-xs font-bold text-emerald-300">Domba</div>
-                </button>
-                
-                <!-- Pilihan Sapi -->
-                <button onclick="triggerSacrifice('sapi', '🐄')" class="animal-card bg-emerald-950/40 border border-emerald-500/20 rounded-xl p-4 transition-all duration-300 cursor-pointer text-center group">
-                    <div class="text-4xl mb-2 group-hover:scale-125 transition-transform">🐄</div>
-                    <div class="text-xs font-bold text-emerald-300">Sapi</div>
-                </button>
-
-                <!-- Pilihan Unta -->
-                <button onclick="triggerSacrifice('unta', '🐪')" class="animal-card bg-emerald-950/40 border border-emerald-500/20 rounded-xl p-4 transition-all duration-300 cursor-pointer text-center group">
-                    <div class="text-4xl mb-2 group-hover:scale-125 transition-transform">🐪</div>
-                    <div class="text-xs font-bold text-emerald-300">Unta</div>
-                </button>
-            </div>
+        <div class="illustration">
+            <i class="fa-solid fa-kaaba"></i>
         </div>
 
-        <!-- Teks Berjalan Kebaikan / Quote -->
-        <div class="text-center italic text-xs text-amber-200/70 border-t border-white/5 pt-4">
-            "Bukan daging atau darahnya yang sampai kepada Allah, melainkan ketakwaanmu."
+        <div class="arabic-text">عِيدُ الْأَضْحَى</div>
+        <h1>Selamat Idul Adha</h1>
+        <div class="subtitle">10 Dzulhijjah 1447 H</div>
+
+        <div class="message-box">
+            <p id="ucapanTeks">"Kurban bukan hanya tentang menyembelih hewan ternak, melainkan menyembelih egoisme dan memupuk keikhlasan. Semoga setiap tetesan darah kurban membawa keberkahan, kebahagiaan, dan melipatgandakan pahala bagi kita semua."</p>
+            <p>- Selamat Hari Raya -</p>
         </div>
+
+        <!-- Interactive Button to Copy Text -->
+        <button class="btn-action" onclick="copyText()">
+            <i class="font-awesome fa-regular fa-copy"></i> Salin Ucapan & Bagikan
+        </button>
+
     </div>
 
-    <!-- Audio Efek Suara Gema Takbir Singkat (Gunakan file WAV ringan) -->
-    <audio id="audio-effect" src="https://mixkit.co" preload="auto"></audio>
+    <!-- Hidden Audio Element (Menggunakan CDN publik suara takbiran gratis) -->
+    <audio id="takbiranAudio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <!-- Catatan: Anda bisa mengganti URL src di atas dengan file audio .mp3 takbiran milik Anda sendiri yang ditaruh di hosting atau link archive.org -->
+    </audio>
+
+    <!-- Notification -->
+    <div class="toast" id="toast">Ucapan berhasil disalin!</div>
 
     <script>
-        // Animasi Masuk Kartu Saat Halaman Dimuat
-        document.addEventListener("DOMContentLoaded", () => {
-            const card = document.getElementById("main-card");
-            // Efek memudar dan naik ke atas menggunakan AnimeJS
-            anime({
-                targets: card,
-                opacity: [0, 1],
-                translateY: [40, 0],
-                duration: 1200,
-                easing: 'easeOutExpo',
-                delay: 200
-            });
+        // Audio Control Logic
+        const audio = document.getElementById('takbiranAudio');
+        const audioBtn = document.getElementById('audioBtn');
+        const audioIcon = document.getElementById('audioIcon');
+
+        // Menggunakan sampel audio takbiran publik alternatif demi fungsionalitas
+        // Anda bebas mengganti link ini dengan audio takbiran yang lebih pas
+        audio.src = "https://archive.org/download/takbiran_202107/takbiran.mp3"; 
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    audioBtn.classList.add('playing');
+                    audioIcon.className = 'fas fa-pause';
+                }).catch(err => {
+                    alert("Izinkan browser memutar audio terlebih dahulu dengan mengetuk layar.");
+                });
+            } else {
+                audio.pause();
+                audioBtn.classList.remove('playing');
+                audioIcon.className = 'fas fa-play';
+            }
+        }
+
+        // Copy Text Logic
+        function copyText() {
+            const textToCopy = document.getElementById('ucapanTeks').innerText;
+            navigator.clipboard.writeText("Selamat Hari Raya Idul Adha 1447 H. " + textToCopy);
+            
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // Particle Background Effect (Malam Takbiran Bertabur Bintang)
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         });
 
-        // Fungsi Interaktif Saat Hewan Kurban Di-klik
-        function triggerSacrifice(type, emoji) {
-            // 1. Play Sound Bedug/Ketukan
-            const sound = document.getElementById("audio-effect");
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log("Audio terblokir sistem browser."));
-
-            // 2. Efek Ledakan Kembang Api Berwarna Tematik (Hijau & Emas)
-            const count = 150;
-            const defaults = { origin: { y: 0.7 } };
-
-            function fire(particleRatio, opts) {
-                confetti(Object.assign({}, defaults, opts, {
-                    particleCount: Math.floor(count * particleRatio)
-                }));
-            }
-
-            fire(0.25, { spread: 26, startVelocity: 55, colors: ['#f59e0b', '#10b981'] });
-            fire(0.2, { spread: 60, colors: ['#ffffff', '#fbbf24'] });
-            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8, colors: ['#047857', '#fbbf24'] });
-            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-
-            // 3. Efek Teks Melayang Mengikuti Pilihan Hewan
-            const floatingText = document.createElement('div');
-            floatingText.innerHTML = `<span class="text-2xl">${emoji}</span> <br> <span class="text-xs font-bold text-amber-400">Bismillah, Berkah!</span>`;
-            floatingText.className = "absolute pointer-events-none text-center font-bold z-50 p-2 bg-slate-900/80 rounded-xl border border-amber-500/30 shadow-lg";
-            floatingText.style.left = (window.innerWidth / 2 - 60) + "px";
-            floatingText.style.top = (window.innerHeight / 2 - 120) + "px";
-            document.body.appendChild(floatingText);
-
-            // Animasi teks melayang ke atas lalu menghilang
-            anime({
-                targets: floatingText,
-                translateY: -100,
-                opacity: [1, 0],
-                scale: [0.5, 1.2],
-                duration: 1500,
-                easing: 'easeOutCubic',
-                complete: () => floatingText.remove()
+        const particles = [];
+        for (let i = 0; i < 60; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 2,
+                alpha: Math.random(),
+                speed: Math.random() * 0.03
             });
         }
 
-        // Efek Gyroscope / Parallax Mouse pada Kartu Utama (PC/Laptop)
-        const card = document.getElementById("main-card");
-        document.addEventListener("mousemove", (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 35;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 35;
-            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
-
-        // Reset Posisi saat mouse keluar dari layar
-        document.addEventListener("mouseleave", () => {
-            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-            card.style.transition = "all 0.6s ease";
-        });
-        document.addEventListener("mouseenter", () => {
-            card.style.transition = "none";
-        });
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(255, 255, 255, ';
+            
+            particles.forEach(p => {
+                p.alpha += p.speed;
+                if (p.alpha > 1 || p.alpha < 0) p.speed = -p.speed;
+                ctx.fillStyle = `rgba(234, 179, 8, ${p.alpha})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
