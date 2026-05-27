@@ -3,40 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Eksklusif: Selamat Hari Raya Idul Adha 1447 H</title>
+    <title>Selamat Hari Raya</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700;900&family=Marcellus&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;800&family=Great+Vibes&family=Lateef:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* ==========================================================================
-           1. ROOT VARIABLES & DESIGN SYSTEM (Arsitektur Warna Kompatibel Gambar)
+           1. CORE DESIGN SYSTEM & VARIABLES
            ========================================================================== */
         :root {
-            --bg-base: #fbf4ea;
-            --bg-gradient: linear-gradient(135deg, #fdf8f2 0%, #f5e6d3 50%, #ead5bc 100%);
-            --primary-gold: #b47b2f;
-            --primary-light: #d4a359;
-            --primary-dark: #7a501c;
-            --accent-cream: #fbf4ea;
-            --text-dark: #3a2a1d;
-            --text-muted: #7c624d;
-            --gold-glow: rgba(180, 123, 47, 0.3);
-            --card-bg: rgba(255, 255, 255, 0.82);
-            --card-border: rgba(180, 123, 47, 0.25);
-            --success-green: #4d7c0f;
-            --shadow-premium: 0 30px 70px rgba(74, 55, 40, 0.18);
-            --font-arabic: 'Amiri', serif;
+            --bg-outside: #110d08;
+            --box-bg: linear-gradient(180deg, #fbf4ea 0%, #f3e5d0 50%, #e6caa3 100%);
+            --gold-primary: #b47b2f;
+            --gold-light: #dfb16c;
+            --gold-dark: #6e4713;
+            --text-main: #3a2a1d;
+            --text-gold: #8c6d43;
+            --border-frame: #ca8a04;
             --font-display: 'Cinzel Decorative', serif;
-            --font-subdisplay: 'Cinzel', serif;
+            --font-sub: 'Cinzel', serif;
+            --font-fancy: 'Great Vibes', cursive;
+            --font-arabic: 'Lateef', serif;
             --font-body: 'Poppins', sans-serif;
         }
 
         /* ==========================================================================
-           2. RESET & CORE STYLES (Optimasi Akses Mobile-First)
+           2. RESET & BASE LAYOUT
            ========================================================================== */
         * {
             box-sizing: border-box;
@@ -45,421 +40,349 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            background: var(--bg-base);
-        }
-
         body {
             font-family: var(--font-body);
-            background: var(--bg-gradient);
-            color: var(--text-dark);
+            background: var(--bg-outside);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            padding: 30px 15px;
+            padding: 20px 10px;
+            overflow: hidden;
         }
 
         /* ==========================================================================
-           3. INTERACTIVE BACKGROUND LAYER (Canvas Fluida & Ornamen Mandala)
+           3. MASTER CINEMA BOX CONTAINER (Semua Elemen Wajib Di Dalam Sini)
            ========================================================================== */
-        #interactive-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .master-box {
             width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: all;
+            max-width: 410px;
+            height: 680px;
+            background: var(--box-bg);
+            border: 3px solid var(--border-frame);
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden; /* Memastikan lampion & kembang api tidak keluar box */
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(180, 123, 47, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 22px;
+            text-align: center;
         }
 
-        .bg-overlay-pattern {
-            position: fixed;
+        /* Ukiran Bingkai Mewah Di Dalam Box */
+        .inner-luxury-frame {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 1px solid rgba(180, 123, 47, 0.3);
+            border-radius: 24px;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .inner-luxury-frame::before, .inner-luxury-frame::after {
+            content: '❖';
+            position: absolute;
+            color: var(--gold-primary);
+            font-size: 14px;
+        }
+        .inner-luxury-frame::before { top: 6px; left: 8px; }
+        .inner-luxury-frame::after { bottom: 6px; right: 8px; }
+
+        /* Canvas Kembang Api Khusus Di Dalam Box */
+        #box-fireworks {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='%23b47b2f' stroke-width='0.4' stroke-opacity='0.07'/%3E%3C/svg%3E");
             z-index: 2;
             pointer-events: none;
         }
 
         /* ==========================================================================
-           4. ADVANCED LANTERN ANIMATION (Sistem Lompok Gantung Bergoyang Relatif)
+           4. ORNAMEN LAMPION INTERNAL (DI DALAM BOX)
            ========================================================================== */
-        .lantern-rack {
+        .internal-lantern-rack {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 220px;
             display: flex;
             justify-content: space-between;
-            padding: 0 25px;
-            z-index: 5;
+            padding: 0 40px;
+            z-index: 15;
             pointer-events: none;
         }
 
-        .hanging-wire {
-            position: relative;
-            width: 40px;
+        .hanging-lantern {
             display: flex;
             flex-direction: column;
             align-items: center;
             transform-origin: top center;
         }
 
-        .wire-left {
-            animation: lanternSwingLeft 4.5s ease-in-out infinite alternate;
+        .lantern-left { animation: swingLeft 4s ease-in-out infinite alternate; }
+        .lantern-right { animation: swingRight 4.6s ease-in-out infinite alternate; }
+
+        .lantern-cord {
+            width: 2px;
+            height: 45px;
+            background: linear-gradient(to bottom, transparent, var(--gold-primary));
         }
 
-        .wire-right {
-            animation: lanternSwingRight 5.2s ease-in-out infinite alternate;
+        .lantern-cap {
+            width: 22px;
+            height: 6px;
+            background: var(--gold-dark);
+            border-radius: 3px 3px 0 0;
         }
 
-        .string {
-            width: 1.5px;
-            height: 70px;
-            background: linear-gradient(to bottom, rgba(180,123,47,0), var(--primary-gold));
-        }
-
-        .lantern-head {
-            width: 16px;
-            height: 8px;
-            background: var(--primary-dark);
-            border-radius: 4px 4px 0 0;
-        }
-
-        .lantern-body {
-            width: 32px;
-            height: 42px;
-            background: linear-gradient(to bottom, var(--primary-light), var(--primary-gold));
-            border-radius: 10px;
+        .lantern-glass {
+            width: 36px;
+            height: 46px;
+            background: linear-gradient(to bottom, var(--gold-light), var(--gold-primary));
+            border-radius: 12px;
             position: relative;
-            box-shadow: 0 8px 20px rgba(180, 123, 47, 0.4), inset 0 0 10px #fff;
+            box-shadow: 0 6px 15px rgba(180, 123, 47, 0.4);
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .lantern-body::after {
+        .lantern-glass::after {
             content: '';
             position: absolute;
-            width: 18px;
-            height: 28px;
-            background: #fffdf0;
-            border-radius: 4px;
-            box-shadow: 0 0 12px #fff, 0 0 4px var(--primary-light);
-            animation: lanternGlow 2s ease-in-out infinite alternate;
+            width: 20px;
+            height: 30px;
+            background: #fffdf2;
+            border-radius: 6px;
+            box-shadow: 0 0 15px #fff;
+            animation: glowPulse 2s ease-in-out infinite alternate;
         }
 
-        .lantern-tail {
+        .lantern-tassel {
             width: 4px;
-            height: 15px;
-            background: var(--primary-gold);
-            border-radius: 0 0 2px 2px;
+            height: 12px;
+            background: var(--gold-primary);
         }
 
         /* ==========================================================================
-           5. CINEMATIC GLASSMORPHISM CONTAINER (Kartu 3D Interaktif Utama)
+           5. AUDIO CONTROLLER & EQUALIZER WAVE
            ========================================================================== */
-        .glass-master-card {
-            width: 100%;
-            max-width: 430px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 36px;
-            padding: 40px 28px;
-            text-align: center;
-            box-shadow: var(--shadow-premium);
-            z-index: 10;
+        .audio-box-dock {
             position: relative;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
-            animation: cardEntrance 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            z-index: 25;
         }
 
-        /* Decorative Inner Frame Border */
-        .card-inner-frame {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
-            border: 1px solid rgba(180, 123, 47, 0.2);
-            border-radius: 26px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .card-inner-frame::before, .card-inner-frame::after {
-            content: '✦';
-            position: absolute;
-            color: var(--primary-light);
-            font-size: 10px;
-        }
-        .card-inner-frame::before { top: 8px; left: 8px; }
-        .card-inner-frame::after { bottom: 8px; right: 8px; }
-
-        /* ==========================================================================
-           6. CONTROLS & INTELLIGENT AUDIO VISUALIZER LAYER
-           ========================================================================== */
-        .media-dock {
-            position: relative;
-            margin-bottom: 25px;
-            z-index: 15;
-            display: inline-block;
-        }
-
-        .action-circle-btn {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-gold) 100%);
+        .btn-audio-interactive {
+            width: 68px;
+            height: 68px;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
             border: 3px solid #fff;
             border-radius: 50%;
             color: white;
-            font-size: 22px;
+            font-size: 20px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 10px 25px rgba(180, 123, 47, 0.35);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
+            box-shadow: 0 8px 20px rgba(180, 123, 47, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .action-circle-btn:active {
-            transform: scale(0.92);
+        .btn-audio-interactive.active-mode {
+            background: linear-gradient(135deg, #4d7c0f 0%, #29420b 100%);
+            box-shadow: 0 8px 20px rgba(77, 124, 15, 0.5);
+            transform: scale(1.05);
         }
 
-        .action-circle-btn.music-active {
-            background: linear-gradient(135deg, var(--success-green) 0%, #3f6212 100%);
-            box-shadow: 0 10px 25px rgba(77, 124, 15, 0.4);
-        }
-
-        /* Efek Gelombang Equalizer Audio */
-        .eq-visualizer {
+        .visualizer-container {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 3px;
-            height: 20px;
-            margin-top: 12px;
-            opacity: 0.5;
-            transition: opacity 0.3s ease;
+            height: 18px;
+            margin-top: 10px;
         }
 
-        .eq-visualizer.active {
-            opacity: 1;
-        }
-
-        .eq-bar {
+        .v-bar {
             width: 3px;
             height: 4px;
-            background-color: var(--primary-gold);
+            background: var(--gold-primary);
             border-radius: 2px;
-            transition: height 0.1s ease;
         }
 
-        .eq-visualizer.active .eq-bar {
-            background-color: var(--success-green);
-            animation: barknock 0.5s ease-in-out infinite alternate;
+        .visualizer-container.playing .v-bar {
+            background: #4d7c0f;
+            animation: waveBounce 0.6s ease-in-out infinite alternate;
         }
 
-        /* Delasi Animasi Tiap Batang Equalizer */
-        .eq-visualizer.active .eq-bar:nth-child(1) { animation-delay: 0.1s; }
-        .eq-visualizer.active .eq-bar:nth-child(2) { animation-delay: 0.4s; }
-        .eq-visualizer.active .eq-bar:nth-child(3) { animation-delay: 0.2s; }
-        .eq-visualizer.active .eq-bar:nth-child(4) { animation-delay: 0.6s; }
-        .eq-visualizer.active .eq-bar:nth-child(5) { animation-delay: 0.3s; }
+        .visualizer-container.playing .v-bar:nth-child(1) { animation-delay: 0.1s; }
+        .visualizer-container.playing .v-bar:nth-child(2) { animation-delay: 0.3s; }
+        .visualizer-container.playing .v-bar:nth-child(3) { animation-delay: 0.5s; }
+        .visualizer-container.playing .v-bar:nth-child(4) { animation-delay: 0.2s; }
+        .visualizer-container.playing .v-bar:nth-child(5) { animation-delay: 0.4s; }
 
-        .status-badge-text {
-            display: block;
-            font-size: 0.72rem;
-            color: var(--text-muted);
+        /* ==========================================================================
+           6. TYPOGRAPHY & DESIGN TEXT
+           ========================================================================== */
+        .txt-celebration {
+            font-family: var(--font-fancy);
+            font-size: 2.3rem;
+            color: var(--gold-dark);
+            margin-bottom: -5px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .txt-main-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(to bottom, var(--gold-dark), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .badge-date {
+            display: inline-block;
+            background: var(--gold-primary);
+            color: #fbf4ea;
+            font-family: var(--font-sub);
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 4px 18px;
+            border-radius: 30px;
             letter-spacing: 2px;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-top: 6px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(180, 123, 47, 0.2);
+            position: relative;
+            z-index: 10;
         }
 
         /* ==========================================================================
-           7. TYPOGRAPHY DESIGN SYSTEM (Komposisi Elegan Sesuai Gambar Referensi)
+           7. VECTOR MASJID UKIRAN MEWAH (SVG PRO)
            ========================================================================== */
-        .brand-subtext {
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--primary-gold);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .brand-main-title {
-            font-family: var(--font-display);
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: var(--primary-dark);
-            line-height: 1.1;
-            margin-bottom: 12px;
-            letter-spacing: -1px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .calendar-tag-wrapper {
-            margin-bottom: 25px;
-        }
-
-        .calendar-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, #dfc6a3 0%, var(--primary-gold) 100%);
-            color: #fff;
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 5px 22px;
-            border-radius: 50px;
-            letter-spacing: 2px;
-            box-shadow: 0 4px 12px rgba(180, 123, 47, 0.25);
-        }
-
-        /* Complex SVG Illustration Render */
-        .mosque-vector-frame {
+        .mosque-carving-svg {
             width: 100%;
             height: auto;
-            max-height: 120px;
-            margin: 15px 0 25px 0;
-            filter: drop-shadow(0 6px 12px rgba(180, 123, 47, 0.15));
+            max-height: 110px;
+            margin: 5px 0;
             position: relative;
-            z-index: 2;
+            z-index: 10;
+            filter: drop-shadow(0 4px 8px rgba(109, 71, 19, 0.15));
         }
 
-        .arabic-calligraphy-container {
+        .txt-arabic-calligraphy {
             font-family: var(--font-arabic);
-            font-size: 2.1rem;
-            font-weight: 700;
-            color: var(--primary-gold);
-            margin-bottom: 20px;
-            line-height: 1.4;
-            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
-        }
-
-        /* ==========================================================================
-           8. TEXT MESSAGE DECK (Blok Kalimat Ucapan Utama)
-           ========================================================================== */
-        .message-viewport {
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            padding: 22px 18px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(180,123,47,0.12);
+            font-size: 3.4rem;
+            color: var(--gold-primary);
+            line-height: 1;
+            margin-bottom: 10px;
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
-        .message-para {
-            font-family: var(--font-body);
-            font-size: 0.92rem;
-            line-height: 1.75;
-            color: var(--text-dark);
-            font-weight: 400;
-            text-align: center;
+        /* Card Ucapan Bersih Tanpa Label Tambahan */
+        .speech-box {
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(180, 123, 47, 0.2);
+            border-radius: 20px;
+            padding: 18px 15px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
-        /* ==========================================================================
-           9. SMART ACTION BUTTON INTERFACES (Tombol Salin & Berbagi)
-           ========================================================================== */
-        .interactive-dock-btn {
-            width: 100%;
-            background: transparent;
-            border: 2px solid var(--primary-gold);
-            color: var(--primary-gold);
+        .speech-box p {
             font-family: var(--font-body);
-            font-weight: 600;
             font-size: 0.9rem;
-            padding: 14px 28px;
+            line-height: 1.65;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Tombol Salin Utama */
+        .btn-action-copy {
+            width: 85%;
+            background: transparent;
+            border: 2px solid var(--gold-primary);
+            color: var(--gold-primary);
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 12px 24px;
             border-radius: 50px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             position: relative;
-            z-index: 2;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 25;
+            transition: all 0.3s ease;
         }
 
-        .interactive-dock-btn:hover, .interactive-dock-btn:active {
-            background: var(--primary-gold);
+        .btn-action-copy:hover, .btn-action-copy:active {
+            background: var(--gold-primary);
             color: white;
-            box-shadow: 0 8px 20px rgba(180, 123, 47, 0.3);
-            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(180, 123, 47, 0.3);
         }
 
         /* ==========================================================================
-           10. ANIMATION TIMELINE DEFINE (Daftar Keyframes Animasi Terpadu)
+           8. TIMELINE KEYFRAMES ANIMATION
            ========================================================================== */
-        @keyframes cardEntrance {
-            from {
-                opacity: 0;
-                transform: translateY(60px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        @keyframes swingLeft {
+            0% { transform: rotate(-4deg); }
+            100% { transform: rotate(4deg); }
         }
 
-        @keyframes lanternSwingLeft {
-            0% { transform: rotate(-5deg); }
-            100% { transform: rotate(5deg); }
+        @keyframes swingRight {
+            0% { transform: rotate(3deg); }
+            100% { transform: rotate(-3deg); }
         }
 
-        @keyframes lanternSwingRight {
-            0% { transform: rotate(4deg); }
-            100% { transform: rotate(-4deg); }
+        @keyframes glowPulse {
+            0% { opacity: 0.7; box-shadow: 0 0 10px #fff; }
+            100% { opacity: 1; box-shadow: 0 0 22px #fff, 0 0 10px var(--gold-light); }
         }
 
-        @keyframes lanternGlow {
-            0% { box-shadow: 0 0 10px #fff, 0 0 3px var(--primary-light); opacity: 0.8; }
-            100% { box-shadow: 0 0 20px #fff, 0 0 10px var(--primary-light); opacity: 1; }
-        }
-
-        @keyframes barknock {
+        @keyframes waveBounce {
             0% { height: 4px; }
-            100% { height: 22px; }
+            100% { height: 18px; }
         }
 
-        /* Toast Popup Notification System */
-        .notification-toast {
+        /* Toast Popup Notifikasi */
+        .toast-popup {
             position: fixed;
-            bottom: 40px;
-            background: #2d4a0f;
-            color: #fff;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            bottom: 30px;
+            background: var(--gold-dark);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 100;
-            font-family: var(--font-body);
-            letter-spacing: 0.5px;
         }
 
-        .notification-toast.pop-visible {
+        .toast-popup.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -467,248 +390,225 @@
 </head>
 <body>
 
-    <canvas id="interactive-canvas"></canvas>
-    
-    <div class="bg-overlay-pattern"></div>
-
-    <div class="lantern-rack">
-        <div class="hanging-wire wire-left">
-            <div class="string"></div>
-            <div class="lantern-head"></div>
-            <div class="lantern-body"></div>
-            <div class="lantern-tail"></div>
-        </div>
-        <div class="hanging-wire wire-right">
-            <div class="string"></div>
-            <div class="lantern-head"></div>
-            <div class="lantern-body"></div>
-            <div class="lantern-tail"></div>
-        </div>
-    </div>
-
-    <div class="glass-master-card" id="mainInteractiveCard">
-        <div class="card-inner-frame"></div>
+    <div class="master-box">
+        <div class="inner-luxury-frame"></div>
         
-        <div class="media-dock">
-            <button class="action-circle-btn" id="audioTrigger" aria-label="Putar Suara Takbiran">
-                <i class="fas fa-play" id="vectorAudioIcon"></i>
-            </button>
-            <div class="eq-visualizer" id="equalizerCore">
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
+        <canvas id="box-fireworks"></canvas>
+
+        <div class="internal-lantern-rack">
+            <div class="hanging-lantern lantern-left">
+                <div class="lantern-cord"></div>
+                <div class="lantern-cap"></div>
+                <div class="lantern-glass"></div>
+                <div class="lantern-tassel"></div>
             </div>
-            <span class="status-badge-text" id="audioStateLabel">Ketuk Guna Takbiran</span>
+            <div class="hanging-lantern lantern-right">
+                <div class="lantern-cord"></div>
+                <div class="lantern-cap"></div>
+                <div class="lantern-glass"></div>
+                <div class="lantern-tassel"></div>
+            </div>
         </div>
 
-        <p class="brand-subtext">Selamat Hari Raya</p>
-        <h1 class="brand-main-title">IDUL ADHA</h1>
-        
-        <div class="calendar-tag-wrapper">
-            <div class="calendar-tag">10 DZULHIJJAH 1447 H</div>
+        <div class="audio-box-dock">
+            <button class="btn-audio-interactive" id="playTrigger">
+                <i class="fas fa-play" id="iconState"></i>
+            </button>
+            <div class="visualizer-container" id="visualizerNode">
+                <div class="v-bar"></div>
+                <div class="v-bar"></div>
+                <div class="v-bar"></div>
+                <div class="v-bar"></div>
+                <div class="v-bar"></div>
+            </div>
         </div>
 
-        <svg class="mosque-vector-frame" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#dfc6a3" />
-                    <stop offset="100%" stop-color="#b47b2f" />
-                </linearGradient>
-            </defs>
-            <path d="M40,70 C40,45 52,40 60,30 C68,40 80,45 80,70 Z" fill="rgba(212, 163, 89, 0.2)" />
-            <path d="M160,70 C160,45 172,40 180,30 C188,40 200,45 200,70 Z" fill="rgba(212, 163, 89, 0.2)" />
-            <path d="M80,70 C80,35 100,20 120,5 C140,20 160,35 160,70 Z" fill="url(#goldGrad)" opacity="0.85" />
-            <rect x="22" y="30" width="6" height="40" fill="#b47b2f" />
-            <path d="M22,30 L25,18 L28,30 Z" fill="#7a501c" />
-            <rect x="212" y="30" width="6" height="40" fill="#b47b2f" />
-            <path d="M212,30 L215,18 L218,30 Z" fill="#7a501c" />
-            <rect x="10" y="70" width="220" height="3" fill="#7a501c" />
+        <p class="txt-celebration">Selamat Hari Raya</p>
+        <h1 class="txt-main-title">IDUL ADHA</h1>
+        <div class="badge-date">1447 HIJRIAH</div>
+
+        <svg class="mosque-carving-svg" viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+            <path d="M90,80 C90,45 105,35 120,35 C135,35 150,45 150,80" fill="none" stroke="rgba(180,123,47,0.2)" stroke-width="2" stroke-dasharray="3,3"/>
+            <path d="M85,75 C85,38 102,22 120,8 C138,22 155,38 155,75 Z" fill="var(--gold-primary)" opacity="0.9" />
+            <rect x="35" y="25" width="8" height="50" fill="var(--gold-light)" />
+            <path d="M33,25 L39,12 L45,25 Z" fill="var(--gold-dark)" />
+            <circle cx="39" cy="35" r="2" fill="#fff" />
+            <circle cx="39" cy="50" r="2" fill="#fff" />
+            
+            <rect x="197" y="25" width="8" height="50" fill="var(--gold-light)" />
+            <path d="M195,25 L201,12 L207,25 Z" fill="var(--gold-dark)" />
+            <circle cx="201" cy="35" r="2" fill="#fff" />
+            <circle cx="201" cy="50" r="2" fill="#fff" />
+            
+            <rect x="20" y="75" width="200" height="4" fill="var(--gold-dark)" />
         </svg>
 
-        <div class="arabic-calligraphy-container">عِيدُ الْأَضْحَى الْمُبَارَك</div>
+        <div class="txt-arabic-calligraphy">عيد مبارك</div>
 
-        <div class="message-viewport">
-            <p class="message-para" id="textTargetSpeech">
-                "Selamat Hari Raya Idul Adha 1447 H. Semoga keikhlasan dan kerendahan hati selalu menyertai setiap langkah hidup kita. Mari jadikan momentum suci kurban ini sebagai jalan untuk meluruhkan ego pribadi serta mempererat jalinan kepedulian terhadap sesama manusia."
-            </p>
+        <div class="speech-box">
+            <p id="targetTeksUcapan">"Selamat Hari Raya Idul Adha. Semoga momentum suci ini dipenuhi dengan kedamaian, kebahagiaan, kemuliaan, serta membawa limpahan berkah yang tak terputus bagi kita dan keluarga besar."</p>
         </div>
 
-        <button class="interactive-dock-btn" id="copyShareBtn">
-            <i class="fa-regular fa-copy"></i> Salin & Bagikan Kebahagiaan
+        <button class="btn-action-copy" id="actionCopyBtn">
+            <i class="fa-regular fa-copy"></i> Salin Ucapan Teks
         </button>
     </div>
 
-    <audio id="coreMediaNode" loop preload="auto">
+    <audio id="audioEngineCore" loop preload="auto">
         <source src="takbiran.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="notification-toast" id="toastAlertNode">Pesan ucapan telah tersalin sukses!</div>
+    <div class="toast-popup" id="toastNode">Teks ucapan berhasil disalin!</div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // --- INTI SISTEM AUDIO & EQUALIZER ---
-            const audioNode = document.getElementById("coreMediaNode");
-            const triggerBtn = document.getElementById("audioTrigger");
-            const audioIcon = document.getElementById("vectorAudioIcon");
-            const visualizer = document.getElementById("equalizerCore");
-            const stateLabel = document.getElementById("audioStateLabel");
+            // --- AUDIO CONTROLLER LOGIC ---
+            const audio = document.getElementById("audioEngineCore");
+            const playBtn = document.getElementById("playTrigger");
+            const iconState = document.getElementById("iconState");
+            const visualizer = document.getElementById("visualizerNode");
 
-            function toggleAudioState() {
-                if (audioNode.paused) {
-                    stateLabel.innerText = "Memuat Sinyal...";
-                    audioNode.play().then(() => {
-                        triggerBtn.classList.add("music-active");
-                        visualizer.classList.add("active");
-                        audioIcon.className = "fas fa-pause";
-                        stateLabel.innerText = "Takbiran Aktif ♪";
+            playBtn.addEventListener("click", function() {
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        playBtn.classList.add("active-mode");
+                        visualizer.classList.add("playing");
+                        iconState.className = "fas fa-pause";
                     }).catch(err => {
-                        stateLabel.innerText = "Gagal Memuat Audio";
-                        console.error("Audio playback failure:", err);
-                        alert("File 'takbiran.mp3' belum ditemukan di server atau folder Anda. Pastikan nama file sudah sesuai!");
+                        alert("File 'takbiran.mp3' belum terbaca di folder GitHub Anda. Pastikan berkas sudah diupload bersama file HTML ini!");
                     });
                 } else {
-                    audioNode.pause();
-                    triggerBtn.classList.remove("music-active");
-                    visualizer.classList.remove("active");
-                    audioIcon.className = "fas fa-play";
-                    stateLabel.innerText = "Ketuk Guna Takbiran";
+                    audio.pause();
+                    playBtn.classList.remove("active-mode");
+                    visualizer.classList.remove("playing");
+                    iconState.className = "fas fa-play";
                 }
-            }
-            triggerBtn.addEventListener("click", toggleAudioState);
+            });
 
-            // --- ENGINE SALIN TEKS & POPUP TOAST ---
-            const copyBtn = document.getElementById("copyShareBtn");
-            const textContent = document.getElementById("textTargetSpeech");
-            const toastNode = document.getElementById("toastAlertNode");
+            // --- COPY FUNCTION LOGIC ---
+            const copyBtn = document.getElementById("actionCopyBtn");
+            const textSource = document.getElementById("targetTeksUcapan");
+            const toast = document.getElementById("toastNode");
 
             copyBtn.addEventListener("click", function() {
-                const compileMessage = textContent.innerText;
-                navigator.clipboard.writeText(compileMessage);
-                
-                toastNode.classList.add("pop-visible");
-                setTimeout(() => {
-                    toastNode.classList.remove("pop-visible");
-                }, 3000);
+                navigator.clipboard.writeText(textSource.innerText);
+                toast.classList.add("visible");
+                setTimeout(() => { toast.classList.remove("visible"); }, 2500);
             });
 
-            // --- SMART 3D GYRO-TILT SIMULATION FOR MOBILE DEVICES ---
-            const cardElement = document.getElementById("mainInteractiveCard");
-            
-            document.addEventListener("mousemove", function(e) {
-                if(window.innerWidth > 768) {
-                    let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                    let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-                    cardElement.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-                }
-            });
-
-            document.addEventListener("mouseleave", function() {
-                cardElement.style.transform = `rotateY(0deg) rotateX(0deg)`;
-            });
-
-            // Sentuhan Halus Mobile Feedback
-            cardElement.addEventListener("touchstart", function() {
-                this.style.transform = "scale(0.97) translateY(2px)";
-            });
-            cardElement.addEventListener("touchend", function() {
-                this.style.transform = "scale(1) translateY(0)";
-            });
-
-            // --- ADVANCED MATH MATH FLUID CANVAS PARTICLE BACKGROUND ---
-            const canvas = document.getElementById("interactive-canvas");
+            // --- AUTO-FIREWORKS MATHEMATICAL LAYER INSIDE CANVA BOX ---
+            const canvas = document.getElementById("box-fireworks");
             const ctx = canvas.getContext("2d");
             
-            let screenWidth = canvas.width = window.innerWidth;
-            let screenHeight = canvas.height = window.innerHeight;
+            // Ukuran Canvas wajib presisi mengikuti dimensi Pembungkus (.master-box)
+            let cWidth = canvas.width = canvas.offsetWidth || 366; 
+            let cHeight = canvas.height = canvas.offsetHeight || 680;
 
-            let pointer = { x: null, y: null, radius: 110 };
+            const fireworksArray = [];
+            const particlesArray = [];
 
-            window.addEventListener("resize", function() {
-                screenWidth = canvas.width = window.innerWidth;
-                screenHeight = canvas.height = window.innerHeight;
-            });
-
-            // Pendeteksi Sentuhan Jari Mengikuti Koordinat Layar HP
-            window.addEventListener("touchmove", function(e) {
-                if(e.touches.length > 0) {
-                    pointer.x = e.touches[0].clientX;
-                    pointer.y = e.touches[0].clientY;
-                }
-            });
-
-            window.addEventListener("touchend", function() {
-                pointer.x = null;
-                pointer.y = null;
-            });
-
-            class ParticleInstance {
+            class FireworkRocket {
                 constructor() {
-                    this.reset();
+                    this.x = Math.random() * cWidth;
+                    this.y = cHeight;
+                    this.targetY = Math.random() * (cHeight * 0.4) + 60; // Meledak di area atas box
+                    this.speed = Math.random() * 3 + 4;
+                    this.color = `hsl(${Math.random() * 360}, 100%, 65%)`;
                 }
-
-                reset() {
-                    this.x = Math.random() * screenWidth;
-                    this.y = Math.random() * screenHeight;
-                    this.radius = Math.random() * 2.2 + 0.4;
-                    this.baseAlpha = Math.random() * 0.5 + 0.1;
-                    this.alpha = this.baseAlpha;
-                    this.angle = Math.random() * Math.PI * 2;
-                    this.velocity = Math.random() * 0.3 + 0.1;
-                    this.sineSpeed = Math.random() * 0.02 + 0.005;
-                }
-
                 update() {
-                    this.y -= this.velocity;
-                    this.angle += this.sineSpeed;
-                    this.x += Math.sin(this.angle) * 0.2;
-
-                    if (this.y < -10) {
-                        this.reset();
-                        this.y = screenHeight + 10;
+                    this.y -= this.speed;
+                    if (this.y <= this.targetY) {
+                        this.explode();
+                        return false;
                     }
-
-                    // Logika Interaksi Jari Tangan dengan Butiran Keemasan
-                    if (pointer.x != null && pointer.y != null) {
-                        let dx = this.x - pointer.x;
-                        let dy = this.y - pointer.y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance < pointer.radius) {
-                            let force = (pointer.radius - distance) / pointer.radius;
-                            let angleDirection = Math.atan2(dy, dx);
-                            this.x += Math.cos(angleDirection) * force * 4;
-                            this.y += Math.sin(angleDirection) * force * 4;
-                        }
-                    }
+                    return true;
                 }
-
                 draw() {
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(180, 123, 47, ${this.alpha})`;
+                    ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
                     ctx.fill();
                 }
-            }
-
-            const particleArray = [];
-            const activeConfigurationCount = Math.min(80, Math.floor((screenWidth * screenHeight) / 9000));
-            
-            for (let i = 0; i < activeConfigurationCount; i++) {
-                particleArray.push(new ParticleInstance());
-            }
-
-            function loopEngine() {
-                ctx.clearRect(0, 0, screenWidth, screenHeight);
-                for (let i = 0; i < particleArray.length; i++) {
-                    particleArray[i].update();
-                    particleArray[i].draw();
+                explode() {
+                    for (let i = 0; i < 35; i++) {
+                        particlesArray.push(new FireworkParticle(this.x, this.y, this.color));
+                    }
                 }
-                requestAnimationFrame(loopEngine);
             }
-            loopEngine();
+
+            class FireworkParticle {
+                constructor(x, y, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.color = color;
+                    this.radius = Math.random() * 2 + 0.5;
+                    let angle = Math.random() * Math.PI * 2;
+                    let speed = Math.random() * 3 + 1;
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed;
+                    this.alpha = 1;
+                    this.decay = Math.random() * 0.015 + 0.015;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.vy += 0.04; // Efek gaya gravitasi jatuh pelan
+                    this.alpha -= this.decay;
+                    return this.alpha > 0;
+                }
+                draw() {
+                    ctx.save();
+                    ctx.globalAlpha = this.alpha;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            // Atur interval konstan peluncuran roket kembang api otomatis dari bawah box
+            let launchTimer = 0;
+
+            function runRenderLoop() {
+                // Efek trail bayangan pudar kembang api
+                ctx.fillStyle = 'rgba(251, 244, 234, 0.2)';
+                ctx.fillRect(0, 0, cWidth, cHeight);
+
+                launchTimer++;
+                if (launchTimer % 45 === 0) { // Setiap beberapa frame roket baru meluncur otomatis
+                    fireworksArray.push(new FireworkRocket());
+                }
+
+                // Update & menggambar roket kembang api
+                for (let i = fireworksArray.length - 1; i >= 0; i--) {
+                    if (!fireworksArray[i].update()) {
+                        fireworksArray.splice(i, 1);
+                    } else {
+                        fireworksArray[i].draw();
+                    }
+                }
+
+                // Update & menggambar serpihan ledakan kembang api
+                for (let i = particlesArray.length - 1; i >= 0; i--) {
+                    if (!particlesArray[i].update()) {
+                        particlesArray.splice(i, 1);
+                    } else {
+                        particlesArray[i].draw();
+                    }
+                }
+
+                requestAnimationFrame(runRenderLoop);
+            }
+
+            // Penyesuaian ukuran jika orientasi layar bergeser
+            window.addEventListener('resize', function() {
+                cWidth = canvas.width = canvas.offsetWidth;
+                cHeight = canvas.height = canvas.offsetHeight;
+            });
+
+            runRenderLoop();
         });
     </script>
 </body>
