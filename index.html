@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Hari Raya Idul Adha & Ibadah Kurban</title>
+    <!-- Tailwind CSS Modern -->
+    <script src="https://tailwindcss.com"></script>
+    <!-- Google Fonts: Arab & Modern Sans -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <!-- Canvas Confetti & AnimeJS untuk Animasi Kompleks -->
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://cloudflare.com"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #111827 100%);
+        }
+        .arabic { font-family: 'Amiri', serif; }
+        .glow-effect { box-shadow: 0 0 30px rgba(234, 179, 8, 0.3); }
+        .animal-card:hover { transform: translateY(-8px) scale(1.05); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 overflow-x-hidden text-white relative">
+
+    <!-- Ornamen Latar Belakang: Siluet Bulan & Bintang Berkedip -->
+    <div class="absolute top-10 left-10 text-6xl opacity-20 animate-pulse">🌙</div>
+    <div class="absolute top-32 right-16 text-xl opacity-40 animate-ping">⭐</div>
+    <div class="absolute bottom-20 left-20 text-xl opacity-30 animate-ping [animation-delay:1s]">⭐</div>
+
+    <!-- KARTU UTAMA -->
+    <div id="main-card" class="relative w-full max-w-2xl bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl text-center opacity-0 translate-y-10 transition-all duration-1000">
+        
+        <!-- Badge Atas -->
+        <span class="inline-block bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs px-4 py-1.5 rounded-full uppercase tracking-widest font-bold mb-6">
+            Dzulhijjah Perayaan & Keikhlasan
+        </span>
+
+        <!-- Teks Kaligrafi Arab -->
+        <h2 class="arabic text-5xl text-amber-400 mb-2 tracking-wide drop-shadow-md">عيد الأضحى المبارك</h2>
+        <p class="text-xs text-emerald-300 uppercase tracking-widest font-semibold mb-6">"Eid Al-Adha Al-Mubarak"</p>
+
+        <!-- Judul Utama -->
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
+            Selamat Hari Raya <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-emerald-400">
+                Idul Adha & Selamat Berkurban
+            </span>
+        </h1>
+        
+        <!-- Ucapan Khidmat -->
+        <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto">
+            Selamat menunaikan <span class="text-amber-300 font-semibold">Ibadah Kurban</span> bagi yang melaksanakan, serta selamat bagi saudara kita yang sedang merayakan puncak <span class="text-emerald-300 font-semibold">Ibadah Haji</span> di tanah suci. Semoga esensi keikhlasan Nabi Ibrahim AS dan keteguhan Nabi Ismail AS meresap ke dalam sanubari kita.
+        </p>
+
+        <!-- FITUR INTERAKTIF: PILIH HEWAN KURBAN DIGITAL -->
+        <div class="bg-black/30 border border-white/5 rounded-2xl p-5 mb-8">
+            <h3 class="text-xs uppercase tracking-wider text-gray-400 font-bold mb-4">
+                👇 Ketuk Hewan Pilihanmu untuk Menyalakan Tabuh Bedug & Kembang Api
+            </h3>
+            
+            <div class="grid grid-cols-3 gap-3">
+                <!-- Pilihan Domba -->
+                <button onclick="triggerSacrifice('domba', '🐑')" class="animal-card bg-emerald-950/40 border border-emerald-500/20 rounded-xl p-4 transition-all duration-300 cursor-pointer text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-125 transition-transform">🐑</div>
+                    <div class="text-xs font-bold text-emerald-300">Domba</div>
+                </button>
+                
+                <!-- Pilihan Sapi -->
+                <button onclick="triggerSacrifice('sapi', '🐄')" class="animal-card bg-emerald-950/40 border border-emerald-500/20 rounded-xl p-4 transition-all duration-300 cursor-pointer text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-125 transition-transform">🐄</div>
+                    <div class="text-xs font-bold text-emerald-300">Sapi</div>
+                </button>
+
+                <!-- Pilihan Unta -->
+                <button onclick="triggerSacrifice('unta', '🐪')" class="animal-card bg-emerald-950/40 border border-emerald-500/20 rounded-xl p-4 transition-all duration-300 cursor-pointer text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-125 transition-transform">🐪</div>
+                    <div class="text-xs font-bold text-emerald-300">Unta</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Teks Berjalan Kebaikan / Quote -->
+        <div class="text-center italic text-xs text-amber-200/70 border-t border-white/5 pt-4">
+            "Bukan daging atau darahnya yang sampai kepada Allah, melainkan ketakwaanmu."
+        </div>
+    </div>
+
+    <!-- Audio Efek Suara Gema Takbir Singkat (Gunakan file WAV ringan) -->
+    <audio id="audio-effect" src="https://mixkit.co" preload="auto"></audio>
+
+    <script>
+        // Animasi Masuk Kartu Saat Halaman Dimuat
+        document.addEventListener("DOMContentLoaded", () => {
+            const card = document.getElementById("main-card");
+            // Efek memudar dan naik ke atas menggunakan AnimeJS
+            anime({
+                targets: card,
+                opacity: [0, 1],
+                translateY: [40, 0],
+                duration: 1200,
+                easing: 'easeOutExpo',
+                delay: 200
+            });
+        });
+
+        // Fungsi Interaktif Saat Hewan Kurban Di-klik
+        function triggerSacrifice(type, emoji) {
+            // 1. Play Sound Bedug/Ketukan
+            const sound = document.getElementById("audio-effect");
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log("Audio terblokir sistem browser."));
+
+            // 2. Efek Ledakan Kembang Api Berwarna Tematik (Hijau & Emas)
+            const count = 150;
+            const defaults = { origin: { y: 0.7 } };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55, colors: ['#f59e0b', '#10b981'] });
+            fire(0.2, { spread: 60, colors: ['#ffffff', '#fbbf24'] });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8, colors: ['#047857', '#fbbf24'] });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+
+            // 3. Efek Teks Melayang Mengikuti Pilihan Hewan
+            const floatingText = document.createElement('div');
+            floatingText.innerHTML = `<span class="text-2xl">${emoji}</span> <br> <span class="text-xs font-bold text-amber-400">Bismillah, Berkah!</span>`;
+            floatingText.className = "absolute pointer-events-none text-center font-bold z-50 p-2 bg-slate-900/80 rounded-xl border border-amber-500/30 shadow-lg";
+            floatingText.style.left = (window.innerWidth / 2 - 60) + "px";
+            floatingText.style.top = (window.innerHeight / 2 - 120) + "px";
+            document.body.appendChild(floatingText);
+
+            // Animasi teks melayang ke atas lalu menghilang
+            anime({
+                targets: floatingText,
+                translateY: -100,
+                opacity: [1, 0],
+                scale: [0.5, 1.2],
+                duration: 1500,
+                easing: 'easeOutCubic',
+                complete: () => floatingText.remove()
+            });
+        }
+
+        // Efek Gyroscope / Parallax Mouse pada Kartu Utama (PC/Laptop)
+        const card = document.getElementById("main-card");
+        document.addEventListener("mousemove", (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 35;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 35;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Reset Posisi saat mouse keluar dari layar
+        document.addEventListener("mouseleave", () => {
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            card.style.transition = "all 0.6s ease";
+        });
+        document.addEventListener("mouseenter", () => {
+            card.style.transition = "none";
+        });
+    </script>
+</body>
+</html>
